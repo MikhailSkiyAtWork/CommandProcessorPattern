@@ -13,44 +13,26 @@ public class Track implements Result{
     // The length of track in km
     private int length_;
     // The rating from 1 to 5
-    private int rating_;
-    // The complexity of track (from 1(easy) to 3 (hard))
-    private int complexity_;
-    private int cityId_;
+
     // Icon for track
     private byte[] icon_;
 
-    public Track(int id, String title, String description, int duration, int length, int rating, int complexity, int cityId, byte[] icon_) {
+    public Track(int id, String title, String description, int duration, int length, byte[] icon_) {
         this.trackId_ = id;
         this.title_ = title;
         this.description_ = description;
         this.duration_ = duration;
         this.length_ = length;
-        this.rating_ = rating;
-        this.complexity_ = complexity;
-        this.cityId_ = cityId;
         this.icon_ = icon_;
     }
 
-    public Track(int id, String title, String description, int duration, int length, int rating, int complexity, int cityId) {
+    public Track(int id, String title, String description, int duration, int length) {
         this.trackId_ = id;
         this.title_ = title;
         this.description_ = description;
         this.duration_ = duration;
         this.length_ = length;
-        this.rating_ = rating;
-        this.complexity_ = complexity;
-        this.cityId_ = cityId;
-    }
 
-    public Track(int id, String title, String description, int duration, int length, int rating, byte[] icon) {
-        this.trackId_ = id;
-        this.title_ = title;
-        this.description_ = description;
-        this.duration_ = duration;
-        this.length_ = length;
-        this.rating_ = rating;
-        this.icon_ = icon;
     }
 
     public int getTrackId() {
@@ -94,13 +76,6 @@ public class Track implements Result{
         this.length_ = length;
     }
 
-    public int getRating() {
-        return rating_;
-    }
-
-    public void setRating(int rating) {
-        this.rating_ = rating;
-    }
 
     public byte[] getIcon() {
         return icon_;

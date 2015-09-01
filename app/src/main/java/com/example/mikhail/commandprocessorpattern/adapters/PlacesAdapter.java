@@ -12,7 +12,6 @@ import android.widget.TextView;
 
 import com.example.mikhail.commandprocessorpattern.R;
 import com.example.mikhail.commandprocessorpattern.model.Place;
-import com.example.mikhail.commandprocessorpattern.model.Preview;
 
 import java.util.List;
 
@@ -21,18 +20,11 @@ import java.util.List;
  */
 public class PlacesAdapter extends ArrayAdapter<Place>{
 
-    private final int VIEW_TYPE_SELECTED = 0;
-    private final int VIEW_TYPE_OTHERS = 1;
-
-    List<Preview> values_;
-
     private static class ViewHolder{
         TextView titleText_;
         TextView descriptionText_;
         ImageView icon_;
     }
-
-
 
     public PlacesAdapter(Context context,List<Place> values){
         super(context,R.layout.place_list_item,values);
@@ -47,7 +39,6 @@ public class PlacesAdapter extends ArrayAdapter<Place>{
             viewHolder = new ViewHolder();
             viewHolder.titleText_ = (TextView) convertView.findViewById(R.id.place_title);
             viewHolder.descriptionText_ = (TextView) convertView.findViewById(R.id.place_description);
-
             viewHolder.icon_ = (ImageView) convertView.findViewById(R.id.place_icon);
             convertView.setTag(viewHolder);
         } else {
@@ -61,29 +52,6 @@ public class PlacesAdapter extends ArrayAdapter<Place>{
             Bitmap bmp1 = BitmapFactory.decodeByteArray(getItem(position).getIcon(), 0, getItem(position).getIcon().length);
             viewHolder.icon_.setImageBitmap(bmp1);
         }
-
-
-
-//        //TODO Delete
-//        if (position==0) {
-//            viewHolder.icon_.setImageBitmap(BitmapFactory.decodeResource(getContext().getResources(), R.drawable.octsquare));
-//        }
-//        if (position ==1){
-//            viewHolder.icon_.setImageBitmap(BitmapFactory.decodeResource(getContext().getResources(),R.drawable.ranevskaya));
-//        }
-//        if (position ==2){
-//            viewHolder.icon_.setImageBitmap(BitmapFactory.decodeResource(getContext().getResources(),R.drawable.kobilin));
-//        }
-//        if (position ==3){
-//            viewHolder.icon_.setImageBitmap(BitmapFactory.decodeResource(getContext().getResources(),R.drawable.ladohin));
-//        }
-//        if (position ==4){
-//            viewHolder.icon_.setImageBitmap(BitmapFactory.decodeResource(getContext().getResources(),R.drawable.chekhovteatr));
-//        }
-//        if (position ==5){
-//            viewHolder.icon_.setImageBitmap(BitmapFactory.decodeResource(getContext().getResources(),R.drawable.lib));
-//        }
-
 
         return convertView;
     }

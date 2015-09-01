@@ -20,18 +20,12 @@ import java.util.List;
  */
 public class TrackAdapter extends ArrayAdapter<Track>{
 
-    private final int VIEW_TYPE_CURRENT_CITY= 0;
-    private final int VIEW_TYPE_TRACKS = 1;
-
     private static class ViewHolder{
         TextView titleText_;
         TextView descriptionText_;
         TextView durationText_;
         TextView lengthText_;
         ImageView icon_;
-        ImageView duration_;
-        ImageView rating_;
-        ImageView length_;
     }
 
     public TrackAdapter(Context context,List<Track> values){
@@ -39,25 +33,8 @@ public class TrackAdapter extends ArrayAdapter<Track>{
     }
 
     @Override
-   public int getItemViewType(int position){
-        return (position == 0) ? VIEW_TYPE_CURRENT_CITY : VIEW_TYPE_TRACKS;
-    }
-
-    @Override
-    public int getViewTypeCount(){
-        return 2;
-    }
-
-//    @Override
-//    public View newView(Context context, List<Track> values,ViewGroup parent){
-//
-//    }
-
-
-    @Override
     public View getView(int position,View convertView,ViewGroup parent){
         ViewHolder viewHolder;
-
 
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.track_list_item, parent, false);

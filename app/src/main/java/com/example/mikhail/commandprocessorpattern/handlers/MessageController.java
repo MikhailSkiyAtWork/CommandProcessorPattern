@@ -1,13 +1,18 @@
 package com.example.mikhail.commandprocessorpattern.handlers;
 
+import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 
 import com.example.mikhail.commandprocessorpattern.helpers.States;
+import com.example.mikhail.commandprocessorpattern.interfaces.UpdateCallbackListener;
 import com.example.mikhail.commandprocessorpattern.managers.RequestProcessor;
 import com.example.mikhail.commandprocessorpattern.model.Place;
+import com.example.mikhail.commandprocessorpattern.model.Result;
 import com.example.mikhail.commandprocessorpattern.model.Track;
+import com.example.mikhail.commandprocessorpattern.requests.CommonRequest;
+import com.example.mikhail.commandprocessorpattern.requests.TracksRequest;
 
 import java.util.List;
 
@@ -16,29 +21,31 @@ import java.util.List;
  */
 public class MessageController extends Handler {
 
+    private static MessageController instance = null;
+
     private RequestProcessor processor_;
 
-    public MessageController(RequestProcessor manager) {
-        this.processor_ = manager;
+    public void init (UpdateCallbackListener listener) {
+        processor_ = new RequestProcessor(listener);
+    }
+
+    public static MessageController getInstance(){
+        if (instance == null){
+            instance = new MessageController();
+        }
+        return instance;
     }
 
     public void handleMessage(Message msg) {
         switch (msg.what) {
-            case States.TRACKS_WERE_FOUND:
-                if (msg.obj != null) {
-                    List<Track> tracks = (List<Track>) msg.obj;
-                    processor_.updateActivity(tracks);
-                }
+            case States.INIT_REQUEST:
+                CommonRequest request = (CommonRequest)msg.obj;
+                processor_.execute(request);
                 break;
 
-            case States.PLACES_WERE_FOUND:
-                Log.v("STATUS", "PLACES_WERE_FOUND");
-                if (msg.obj != null) {
-                    List<Place> places = (List<Place>) msg.obj;
-                    Log.v("Places", Integer.toString(places.size()));
-
-                    processor_.updateActivity(places);
-                }
+            case States.REQUEST_COMPLETED:
+                List<Result> results = (List<Result>)msg.obj;
+                processor_.updateActivity(results);
                 break;
 
             default:

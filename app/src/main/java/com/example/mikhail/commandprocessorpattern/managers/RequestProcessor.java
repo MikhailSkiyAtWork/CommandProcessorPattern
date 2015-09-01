@@ -17,8 +17,8 @@ public class RequestProcessor {
         this.clientActivity_ = clienActivity;
     }
 
-    public void execute(CommonRequest request, int id) {
-        request.sendRequest(id);
+    public void execute(CommonRequest request) {
+        request.sendRequest(request.requestId);
     }
 
     public void updateActivity(List<? extends Result> results) {
