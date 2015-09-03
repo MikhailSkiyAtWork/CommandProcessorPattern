@@ -42,7 +42,7 @@ public class MainActivity extends FragmentActivity implements UpdateCallbackList
 
         listView_ = (ListView) this.findViewById(R.id.track_list);
 
-        // Get instnace of controller
+        // Get the instnace of controller
         controller_ = MessageController.getInstance();
         // Init controller by passing listener
         // It is necessary for updating current activity when request completed
